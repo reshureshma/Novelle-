@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVELLE Admin Panel</title>
+    <link rel="stylesheet" href="administer.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <%- include('../partials/admin/header.ejs') %> <!-- Include Header -->
+
+    <main class="dashboard-container">
+        <%- include('../partials/admin/sidebar.ejs') %> <!-- Include Sidebar -->
+
+        <div class="content">
+            <h1>ADMIN PANEL</h1>
+
+            <div class="product-controls">
+                <button class="add-product-btn">ADD PRODUCT</button>
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="SEARCH PRODUCT">
+                </div>
+            </div>
+
+            <div class="product-list">
+                <div class="product-header">
+                    <div class="header-item product-name">PRODUCT NAME</div>
+                    <div class="header-item price">PRICE</div>
+                    <div class="header-item bestseller">BESTSELLER</div>
+                    <div class="header-item trending">TRENDING</div>
+                    <div class="header-item actions"></div>
+                </div>
+            
+                <div class="product-item">
+                    <div class="product-info">
+                        <img src="https://m.media-amazon.com/images/I/41MJ1i1nIqL._SY445_SX342_.jpg" alt="Book cover" class="product-image">
+                        <div class="product-title">THE ALCHEMIST</div>
+                    </div>
+                    <div class="product-price">₹ 499</div>
+                    <div class="product-bestseller">YES</div>
+                    <div class="product-trending">NO</div>
+                    <div class="product-actions">
+                        <button class="update-btn">UPDATE</button>
+                        <button class="delete-btn">DELETE</button>
+                    </div>
+                </div>
+            
+                <div class="product-item">
+                    <div class="product-info">
+                        <img src="https://m.media-amazon.com/images/I/51lTtUTFzPL._SY445_SX342_.jpg" alt="Book cover" class="product-image">
+                        <div class="product-title">THE FAULT IN OUR STARS</div>
+                    </div>
+                    <div class="product-price">₹ 3999</div>
+                    <div class="product-bestseller">NO</div>
+                    <div class="product-trending">YES</div>
+                    <div class="product-actions">
+                        <button class="update-btn">UPDATE</button>
+                        <button class="delete-btn">DELETE</button>
+                    </div>
+                </div>
+            
+                <div class="product-item">
+                    <div class="product-info">
+                        <img src="https://m.media-amazon.com/images/I/51ocMz8-DvL._SY445_SX342_.jpg" alt="Book cover" class="product-image">
+                        <div class="product-title">WITCH'S SECRET</div>
+                    </div>
+                    <div class="product-price">₹ 599</div>
+                    <div class="product-bestseller">NO</div>
+                    <div class="product-trending">YES</div>
+                    <div class="product-actions">
+                        <button class="update-btn">UPDATE</button>
+                        <button class="delete-btn">DELETE</button>
+                    </div>
+                </div>
+            
+                <div class="product-item">
+                    <div class="product-info">
+                        <img src="https://m.media-amazon.com/images/I/41SYDaATCmL._SY445_SX342_.jpg" alt="Book cover" class="product-image">
+                        <div class="product-title">THE WOMEN IN THE WALLS</div>
+                    </div>
+                    <div class="product-price">₹ 499</div>
+                    <div class="product-bestseller">NO</div>
+                    <div class="product-trending">NO</div>
+                    <div class="product-actions">
+                        <button class="update-btn">UPDATE</button>
+                        <button class="delete-btn">DELETE</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="load-more-container">
+                <button class="load-more-btn">LOAD MORE</button>
+            </div>
+            
+        </div>
+    </main>
+
+    <script>
+        // Simple interactions for demonstration
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelector('.menu-item.selected')?.classList.remove('selected');
+                this.classList.add('selected');
+            });
+        });
+    </script>
+
+</body>
+</html>

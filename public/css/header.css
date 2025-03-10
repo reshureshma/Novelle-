@@ -1,0 +1,134 @@
+/* Header Styles */
+.header {
+    width: 100%;
+    padding: 20px 0;
+  }
+  
+  .header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Logo */
+  .logo a {
+    text-decoration: none;
+    color: #333;
+  }
+  
+  .logo h1 {
+    font-family: 'Times New Roman', serif;
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin: 0;
+  }
+  
+  /* Navigation */
+  .main-nav .nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .main-nav .nav-links li {
+    margin: 0 20px;
+  }
+  
+  .main-nav .nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 16px;
+    letter-spacing: 1.5px;
+    font-weight: 400;
+    padding: 5px 0;
+    transition: color 0.3s ease;
+    text-transform: uppercase;
+  }
+  
+  .main-nav .nav-links a:hover {
+    color: #777;
+  }
+  
+  .main-nav .nav-links a.active {
+    font-weight: 500;
+  }
+  
+  /* Header Icons */
+  .header-icons {
+    display: flex;
+    align-items: center;
+  }
+  
+  .header-icons .icon-link {
+    margin-left: 20px;
+    color: #333;
+    transition: color 0.3s ease;
+  }
+  
+  .header-icons .icon-link:hover {
+    color: #777;
+  }
+  
+  .header-icons .icon {
+    width: 22px;
+    height: 22px;
+  }
+  
+  /* Header Divider */
+  .header-divider {
+    height: 1px;
+    background-color: #eaeaea;
+    width: 100%;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .header-container {
+      flex-direction: column;
+      padding: 15px 20px;
+    }
+    
+    .logo {
+      margin-bottom: 15px;
+    }
+    
+    .main-nav {
+      margin: 10px 0;
+    }
+    
+    .main-nav .nav-links li {
+      margin: 0 10px;
+    }
+    
+    .header-icons {
+      margin-top: 15px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .main-nav .nav-links {
+      justify-content: center;
+    }
+    
+    .main-nav .nav-links li {
+      margin: 0 8px;
+    }
+    
+    .main-nav .nav-links a {
+      font-size: 14px;
+    }
+    
+    .header-icons .icon-link {
+      margin-left: 15px;
+    }
+    
+    .header-icons .icon {
+      width: 20px;
+      height: 20px;
+    }
+  }

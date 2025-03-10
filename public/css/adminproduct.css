@@ -1,0 +1,244 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: #f8f9fa;
+    color: #212529;
+}
+/* Main Content */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1 {
+    color: #0a2763;
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+/* Content Area */
+.content {
+    flex: 1;
+    padding: 20px;
+}
+
+/* Product Controls */
+.product-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.add-product-btn {
+    background-color: #0a2763;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-product-btn:hover {
+    background-color: #051d4a;
+}
+
+/* Search Bar */
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-radius: 30px;
+    padding: 10px 15px;
+    min-width: 250px;
+}
+
+.search-container i {
+    color: #6c757d;
+    margin-right: 10px;
+}
+
+.search-container input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+/* Product List */
+.product-list {
+    margin-bottom: 20px;
+}
+
+.product-header {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr 2fr;
+    background-color: #f0f0f0;
+    padding: 15px;
+    font-weight: 600;
+    border-radius: 4px 4px 0 0;
+}
+
+.header-item {
+    font-size: 0.85rem;
+    color: #333;
+}
+
+.product-item {
+    display: grid;
+    grid-template-columns: 3fr 1fr 1fr 1fr 2fr;
+    padding: 15px;
+    align-items: center;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.product-info {
+    display: flex;
+    align-items: center;
+}
+
+.product-image {
+    width: 60px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 15px;
+    border-radius: 4px;
+}
+
+.product-title {
+    font-weight: 500;
+}
+
+.product-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.update-btn, .delete-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    color: white;
+    font-weight: 500;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.update-btn {
+    background-color: #2196f3;
+}
+
+.update-btn:hover {
+    background-color: #0d8aee;
+}
+
+.delete-btn {
+    background-color: #f44336;
+}
+
+.delete-btn:hover {
+    background-color: #d32f2f;
+}
+
+/* Load More Button */
+.load-more-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.load-more-btn {
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.load-more-btn:hover {
+    background-color: #f8f9fa;
+}
+/* Responsive Design */
+@media (max-width: 992px) {
+    .dashboard-container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #e9ecef;
+    }
+    
+    .menu-item {
+        padding: 15px;
+    }
+    
+    .product-header, .product-item {
+        grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .product-controls {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .search-container {
+        width: 100%;
+    }
+    
+    .product-header, .product-item {
+        grid-template-columns: 2fr 1fr 1fr;
+    }
+    
+    .header-item.trending, .product-trending {
+        display: none;
+    }
+    
+    .header-item.bestseller, .product-bestseller {
+        display: none;
+    }
+    
+    .product-actions {
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    
+    .menu-item span {
+        font-size: 0.9rem;
+    }
+    
+    .product-header, .product-item {
+        grid-template-columns: 2fr 1fr;
+    }
+    
+    .header-item.price, .product-price {
+        display: none;
+    }
+    
+    .update-btn, .delete-btn {
+        padding: 6px 10px;
+        font-size: 0.7rem;
+    }
+}

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVELLE Admin Panel</title>
+    <link rel="stylesheet" href="/styles/adminuser.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <%- include("../partials/admin/header.ejs") %>
+    
+    <main>
+        <h1>ADMIN PANEL</h1>
+        
+        <div class="dashboard-container">
+            <%- include("../partials/admin/sidebar.ejs") %>
+
+            <div class="content">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="SEARCH ORDER">
+                </div>
+                
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>USER NAME</th>
+                                <th>EMAIL ADDRESS</th>
+                                <th>PHONE NUMBER</th>
+                                <th>JOIN DATE</th>
+                                <th>BLOCK</th>
+                                <th>DELETE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% users.forEach(user => { %>
+                            <tr>
+                                <td><%= user.name %></td>
+                                <td><%= user.email %></td>
+                                <td><%= user.phone %></td>
+                                <td><%= user.joinDate %></td>
+                                <td><button class="block-btn">BLOCK</button></td>
+                                <td><button class="delete-btn">DELETE</button></td>
+                            </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="pagination">
+                    <span>Showing 1-10 from 100</span>
+                    <div class="pagination-controls">
+                        <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
+                        <button class="page-btn active">01</button>
+                        <button class="page-btn">02</button>
+                        <button class="page-btn">03</button>
+                        <button class="page-btn">04</button>
+                        <button class="page-btn">05</button>
+                        <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelector('.menu-item.selected')?.classList.remove('selected');
+                this.classList.add('selected');
+            });
+        });
+        
+        document.querySelectorAll('.block-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.textContent = this.textContent === "BLOCK" ? "UNBLOCK" : "BLOCK";
+                this.classList.toggle('blocked');
+            });
+        });
+    </script>
+</body>
+</html>

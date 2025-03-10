@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify - One Step Away</title>
+    <link rel="stylesheet" href="/css/otp.css">
+</head>
+<body>
+    <div class="verification-container">
+        <!-- Background is set in CSS -->
+        
+        <div class="verification-content">
+            <h1>Verify - One Step Away!</h1>
+            
+            <div class="verification-form">
+                <p class="instruction">
+                    Your one-time password has been sent to your email
+                    <span class="email"><%= email || "your email" %></span>, please enter your <span class="highlight">OTP</span>
+                </p>
+                
+                <div class="otp-input-container">
+                    <input type="text" class="otp-input" placeholder="Enter OTP here">
+                </div>
+                
+                <div class="resend-container">
+                    <a href="#" class="resend-link">Resend OTP in 30s</a>
+                </div>
+                
+                <button class="verify-btn">Verify</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

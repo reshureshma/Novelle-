@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVELLE Admin Panel - Add Product</title>
+    <link rel="stylesheet" href="/css/adminaddproduct.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <%- include("../partials/admin/header.ejs") %>
+
+    <main>
+        <h1>ADMIN PANEL</h1>
+        
+        <div class="dashboard-container">
+            <%- include("../partials/admin/sidebar.ejs")%>
+
+            <div class="content">
+                <div class="add-product-form">
+                    <h2>Add Product</h2>
+                    
+                    <form action="/admin/add-product" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="product-name">Product Name</label>
+                            <input type="text" name="productName" id="product-name" placeholder="Enter Product Name" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="product-price">Product Price</label>
+                            <input type="number" name="productPrice" id="product-price" placeholder="Enter Product Price" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="secondary-price">Secondary Price</label>
+                            <input type="number" name="secondaryPrice" id="secondary-price" placeholder="Enter Secondary Product Price (optional)">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="offer-percentage">Offer Percentage</label>
+                            <input type="number" name="offerPercentage" id="offer-percentage" placeholder="Enter Offer Percentage (0-100)">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="product-description">Product Description</label>
+                            <textarea name="productDescription" id="product-description" placeholder="Enter Product Description" required></textarea>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group checkbox-group">
+                                <label for="bestselling">BESTSELLING</label>
+                                <input type="checkbox" name="bestselling" id="bestselling">
+                            </div>
+                            
+                            <div class="form-group checkbox-group">
+                                <label for="trending">TRENDING</label>
+                                <input type="checkbox" name="trending" id="trending">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="stock">Stock</label>
+                            <div class="stock-counter">
+                                <button type="button" class="counter-btn" id="decrease-stock">-</button>
+                                <input type="number" name="stock" id="stock" value="0" min="0">
+                                <button type="button" class="counter-btn" id="increase-stock">+</button>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Product Image</label>
+                            <input type="file" name="productImage" accept="image/*">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select name="category">
+                                <option value="Fiction">Fiction</option>
+                                <option value="Non-fiction">Non-fiction</option>
+                                <option value="Kids">Kids</option>
+                                <option value="Lifestyle">Lifestyle</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">Add Product</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <script>
+        document.querySelectorAll('.menu-item').forEach(item => {
+            item.addEventListener('click', function() {
+                document.querySelector('.menu-item.selected')?.classList.remove('selected');
+                this.classList.add('selected');
+            });
+        });
+        
+        document.getElementById('increase-stock').addEventListener('click', function() {
+            const stockInput = document.getElementById('stock');
+            stockInput.value = parseInt(stockInput.value) + 1;
+        });
+        
+        document.getElementById('decrease-stock').addEventListener('click', function() {
+            const stockInput = document.getElementById('stock');
+            if (parseInt(stockInput.value) > 0) {
+                stockInput.value = parseInt(stockInput.value) - 1;
+            }
+        });
+    </script>
+</body>
+</html>

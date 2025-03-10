@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Reader Homepage</title>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+    <%-include("../../views/partials/user/header.ejs")%>
+    <section class="hero">
+        <div class="hero-overlay">
+            <h1>Bringing Your Next Favourite Read Closer</h1>
+        </div>
+    </section>
+
+    <section class="bestseller">
+        <h2>BESTSELLER</h2>
+        <div class="book-row">
+            <div class="book-card">
+                <div class="book-image">
+                    <img src="images/it-ends-with-us.jpg" alt="It Ends With Us by Colleen Hoover">
+                </div>
+                <h3>It Ends With Us</h3>
+                <p class="author">Colleen Hoover</p>
+                <div class="rating">★★★★☆</div>
+            </div>
+            <div class="book-card">
+                <div class="book-image">
+                    <img src="images/alchemist.jpg" alt="The Alchemist">
+                </div>
+                <h3>The Alchemist</h3>
+                <p class="author">Paulo Coelho</p>
+                <div class="rating">★★★★★</div>
+            </div>
+            <div class="book-card">
+                <div class="book-image">
+                    <img src="images/atomic-habits.jpg" alt="Atomic Habits">
+                </div>
+                <h3>Atomic Habits</h3>
+                <p class="author">James Clear</p>
+                <div class="rating">★★★★☆</div>
+            </div>
+            <div class="book-card">
+                <div class="book-image">
+                    <img src="images/ikigai.jpeg" alt="It Starts With Us">
+                </div>
+                <h3>It Starts With Us</h3>
+                <p class="author">Colleen Hoover</p>
+                <div class="rating">★★★★☆</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="trending">
+        <h2>TRENDING NOW</h2>
+        <div class="trending-row">
+            <div class="trending-card">
+                <img src="images/It Starts With Us.jpeg" alt="The Alchemist Book">
+                <div class="trending-overlay">
+                    <button class="read-more">READ MORE</button>
+                </div>
+            </div>
+            <div class="trending-card">
+                <img src="images/it-ends-with-us-feature.jpg" alt="It Ends With Us Book">
+                <div class="trending-overlay">
+                    <button class="read-more">READ MORE</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="categories">
+        <h2>SHOP BY CATEGORIES</h2>
+        <div class="category-grid">
+            <div class="category-card">
+                <img src="images/fiction.jpg" alt="Fiction">
+                <p>FICTION</p>
+            </div>
+            <div class="category-card">
+                <img src="images/mystery.jpg" alt="Mystery">
+                <p>MYSTERY</p>
+            </div>
+            <div class="category-card">
+                <img src="images/non-fiction.jpg" alt="Non-Fiction">
+                <p>NON-FICTION</p>
+            </div>
+            <div class="category-card">
+                <img src="images/children.jpg" alt="Children">
+                <p>CHILDREN</p>
+            </div>
+            <div class="category-card">
+                <img src="images/self-help.jpg" alt="Self Help">
+                <p>SELF HELP</p>
+            </div>
+            <div class="category-card">
+                <img src="images/science.jpg" alt="Science">
+                <p>SCIENCE</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="classics">
+        <div class="classics-overlay">
+            <h2>Classic & New Favourites</h2>
+        </div>
+    </section>
+<%-include("../../views/partials/user/footer.ejs")%>
+</body>
+</html>
