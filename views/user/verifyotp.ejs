@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify - One Step Away</title>
+    <link rel="stylesheet" href="/css/otp.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+     <!-- Include jQuery (Required for $.ajax) -->
+     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .timer {
+            display: inline-block;
+            margin-left: 5px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="verification-container">
+        <!-- Background is set in CSS -->
+        
+        <div class="verification-content">
+            <h1>Verify - One Step Away!</h1>
+            <form id="otpForm" action="/verifyotp" method="post" onsubmit="return validateOTPform()">
+                <div class="verification-form">
+                    <p class="instruction">
+                        Your one-time password has been sent to your email
+                        <span class="email">example@example.com</span>, please enter your <span class="highlight">OTP</span>
+                    </p>
+                    
+                    <div class="otp-input-container">
+                        <input type="text" id="otpname" class="otp-input" placeholder="Enter OTP here">
+                    </div>
+                    
+                    <div class="resend-container">
+                        <button type="button" onclick="resendOTP()">
+                        <a href="#" class="resend-link" id="resendLink">Resend OTP</a>
+                        </button>
+                        <span class="timer" id="timer">0s</span>
+                    </div>
+                    
+                    <button class="verify-btn">Verify</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        // Timer functionality
+        let timerValue = 0;
+    let timerInterval;
+    const maxTime = 30;
+    const timerElement = document.getElementById('timer');
+    const resendLink = document.getElementById('resendLink');
+
+    // Disable resend link initially
+    resendLink.style.pointerEvents = 'none';
+    resendLink.style.opacity = '0.5';
+
+    // Start timer immediately when page loads
+    startTimer();
+
+    function startTimer() {
+        timerValue = 60; // Start from 30
+        updateTimerDisplay();
+        
+        timerInterval = setInterval(function() {
+            timerValue--; // Count down
+            updateTimerDisplay();
+            
+            if (timerValue <= 0) { // Change condition to check for 0 or less
+                clearInterval(timerInterval);
+                // Enable resend link when timer completes
+                resendLink.style.pointerEvents = 'auto';
+                resendLink.style.opacity = '1';
+            }
+        }, 1000);
+    }
+
+    function updateTimerDisplay() {
+        timerElement.textContent = timerValue + 's';
+    }
+
+    // Reset timer when resend link is clicked
+    resendLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (timerValue <= 0) { // Change condition to check for 0 or less
+            // Disable link again
+            resendLink.style.pointerEvents = 'none';
+            resendLink.style.opacity = '0.5';
+            
+            // Restart timer
+            clearInterval(timerInterval);
+            startTimer();
+            
+            // Here you would also add the code to actually resend the OTP
+            console.log("Resending OTP...");
+        }
+    });
+        
+        function validateOTPform() {
+            debugger
+            const otpInput = document.getElementById("otpname").value.trim();
+            console.log("otpppppp",otpInput);
+            
+
+            $.ajax({
+                type:"POST",
+                url:"http://localhost:8080/verifyotp",
+                contentType:"application/json",
+                data:JSON.stringify({ otp:otpInput }),
+                success:function(response){
+                    if(response.success){
+                        Swal.fire({
+                            icon:"success",
+                            title:"OTP verified succesfully",
+                            showConfirmButton : false,
+                            timer:1500,
+                        }).then(()=>{
+                            window.location.hef = response.redirectUrl;
+                        })
+                    }
+                    else{
+                        Swal.fire({
+                            icon:"error",
+                            title:"error",
+                            text:response.message,
+                        })
+                    }
+                },
+
+                error:function(){
+                    Swal.fire({
+                        icon:"error",
+                        title:"Invalid OTP",
+                        text:"Please try again"
+                    })
+
+                }
+            })
+           return false; 
+        }
+
+        function resendOTP(){
+            clearInterval(timerInterval);
+            time =60;
+            document.getElementById("otp").disabled="false";
+            document.getElementById("timervalue").classList.remove("expired");
+            startTimer();
+            $.ajax({
+                type:"POST",
+                url:"resendotp",
+                success:function(response){
+                    if(response.success){
+                        Swal.fire({
+                            icon:"success",
+                            title:"OTP resend successful",
+                            showConfirmButton:false,
+                            timer:1500,
+
+                        })
+                    }else{
+                        Swal.fire({
+                            icon:"error",
+                            title:"error",
+                            text:"An error occured while resending otp,try again",
+
+                        })
+                    }
+                }
+
+            })
+            return false;
+        }
+    </script>
+</body>
+</html>

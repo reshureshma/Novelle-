@@ -1,0 +1,155 @@
+/* Main Styles for Admin Login */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden;
+}
+
+.login-container {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+}
+
+/* Left side - Books image */
+.books-image {
+    flex: 1;
+    background-image: url('/images/books-shelf.jpg'); /* Update this path to your actual image */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* Right side - Login form */
+.login-form-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #0a2151; /* Dark blue from the image */
+    color: white;
+    padding: 2rem;
+}
+
+.login-form-container h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.login-form {
+    width: 100%;
+    max-width: 450px;
+    background-color: #e9ebf0; /* Light gray from form background */
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    color: #0a2151; /* Dark blue */
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.password-input-container {
+    position: relative;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    display: none;
+}
+
+.signup-btn {
+    width: 100%;
+    background-color: #0a2151; /* Dark blue */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    transition: background-color 0.3s;
+}
+
+.signup-btn:hover {
+    background-color: #051845;
+}
+
+.helper-links {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.helper-links a {
+    color: #0a2151;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.helper-links a:hover {
+    color: #051845;
+    text-decoration: underline;
+}
+
+.divider {
+    color: #999;
+}
+
+/* For smaller screens */
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+    }
+    
+    .books-image {
+        height: 30vh;
+    }
+    
+    .login-form-container {
+        height: 70vh;
+        padding: 1rem;
+    }
+    
+    .login-form {
+        padding: 1.5rem;
+    }
+}

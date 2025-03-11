@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="login-container">
+        <!-- Background Image Section -->
+        <div class="books-image"></div>
+        
+        <!-- Login Form Section -->
+        <div class="login-form-container">
+            <h1>Welcome Back, Reader!</h1>
+            <form id="log-form" method="post" action="/admin/login">
+            <div class="login-form">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your Email Address">
+                    <div id="email-error" class="error-message"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-input-container">
+                        <input type="password" id="password" name="password" placeholder="Enter a password">
+                        <!-- <span class="password-toggle">
+                            <i class="fas fa-eye-slash"></i>
+                        </span> -->
+                        <div id="password-error" class="error-message"></div>
+
+                    </div>
+
+                </div>
+                
+                <button type="submit" class="signup-btn">Signup</button>
+                
+                <div class="helper-links">
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                    <!-- <span class="divider">OR</span> -->
+                    <a href="/login" class="admin-login">User Login</a>
+                </div>
+                
+                <!-- <div class="social-login">
+                    <button class="google-btn">
+                        <img src="google-icon.png" alt="Google">
+                        Sign in with Google
+                    </button> -->
+                    <!-- <button class="apple-btn">
+                        <i class="fab fa-apple"></i>
+                        Sign in with Apple
+                    </button> -->
+                <!-- </div> -->
+                
+                <!-- <p class="signup-link">Don't have an account? <a href="/signup">Sign up</a></p> -->
+            </div>
+        </form>
+        </div>
+    </div>
+
+    <script>
+        const emailId = document.getElementById("email");
+        const passwordId = document.getElementById("password");
+        
+
+        const emailError = document.getElementById("email-error");
+        const passwordError = document.getElementById("password-error");
+
+        const loginForm = document.getElementById("log-form");
+
+        function emailValidate(){
+            const emailVal = emailId.value.trim();
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            let isEmail = true;
+
+            if(emailVal === "") {
+                emailError.style.display = "block";
+                emailError.innerHTML = "email field required";
+                isEmail = false;
+            }
+            else if(!emailPattern.test(emailVal)){
+
+                emailError.style.display = "block";
+                emailError.innerHTML = "email is not correct format";
+                isEmail = false;
+
+            }
+            else{
+                emailError.style.display = "";
+                emailError.innerHTML = "";
+            }
+            return isEmail;
+
+        };
+
+        function passwordValidate(){
+            const passval = passwordId.value.trim();
+            const passpattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+            let isValid = true;
+    
+            if (passval === "") {
+                passwordError.style.display = "block";
+                passwordError.innerHTML = "Password field cannot be empty.";
+                isValid = false;
+            } else if (passval.length < 8) {
+                passwordError.style.display = "block";
+                passwordError.innerHTML = "Password must be at least 8 characters long.";
+                isValid = false;
+            } else if (!/[A-Z]/.test(passval)) {
+                passwordError.style.display = "block";
+                passwordError.innerHTML = "Password must contain at least one uppercase letter (A-Z).";
+                isValid = false;
+            } else if (!/[a-z]/.test(passval)) {
+                passwordError.style.display = "block";
+                passwordError.innerHTML = "Password must contain at least one lowercase letter (a-z).";
+                isValid = false;
+            } else if (!/\d/.test(passval)) {
+                passwordError.style.display = "block";
+                passwordError.innerHTML = "Password must contain at least one number (0-9).";
+                isValid = false;
+            } else if (!/[@$!%*?&]/.test(passval)) {
+                passwordError.style.display = "block";
+                passwordError.innerHTML = "Password must contain at least one special character (@$!%*?&).";
+                isValid = false;
+            } else {
+                passwordError.style.display = "none";
+                passwordError.innerHTML = "";
+            }
+
+            return isValid
+    
+        };
+
+        emailId.addEventListener("input",emailValidate);
+        passwordId.addEventListener("input",passwordValidate);
+
+        loginForm.addEventListener("submit",function(e){
+
+            isEmailValid=emailValidate();
+            isPasswordValid=passwordValidate();
+
+            if(!isEmailValid||!isPasswordValid){
+                e.preventDefault();
+            }
+            
+        });
+
+    </script>
+</body>
+</html>
