@@ -1,204 +1,237 @@
-/* Main Content Styles */
-.admin-container {
-    width: 100%;
-    padding: 20px;
-}
-
-h1 {
-    color: #0a2559;
-    font-size: 36px;
-    margin-bottom: 30px;
-}
-
-/* Dashboard Layout */
-.dashboard-layout {
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+  }
+  
+  body {
+    background-color: #f9f9f9;
+  }
+  
+  main {
+    min-height: 100vh;
+  }
+  
+  .admin-container {
+    padding: 0;
     display: flex;
-    gap: 20px;
-}
-
-.dashboard-content {
+    flex-direction: column;
+  }
+  
+  .admin-container h1 {
+    font-size: 42px;
+    font-weight: bold;
+    color: #0a214e;
+    margin: 30px 0;
+    padding-left: 90px;
+  }
+  
+  .dashboard-content {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  /* Adjust the sidebar position to be alongside the content */
+  .dashboard-content .sidebar {
+    flex: 0 0 280px;
+  }
+  
+  /* Create a content wrapper for everything to the right of sidebar */
+  .content-wrapper {
     flex: 1;
-}
-
-.dashboard-header {
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .dashboard-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 20px;
-}
-
-.time-filter select {
-    padding: 8px 15px;
+  }
+  
+  .time-filter select {
+    padding: 8px 30px 8px 16px;
+    background-color: #fff;
     border: 1px solid #ddd;
-    background-color: white;
     border-radius: 4px;
+    font-size: 14px;
     cursor: pointer;
-    color: #0a2559;
-    font-weight: bold;
-}
-
-.export-btn {
-    background-color: #f5f5f5;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 16px;
+  }
+  
+  .export-btn {
+    background-color: #f0f0f0;
     border: 1px solid #ddd;
-    padding: 8px 15px;
     border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 5px;
-}
-
-/* Stats Grid */
-.stats-grid {
+    gap: 8px;
+  }
+  
+  .stats-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
+    gap: 20px;
     margin-bottom: 20px;
-}
-
-.stat-card {
-    background-color: #0a2559;
+  }
+  
+  .stat-card {
+    background-color: #0a214e;
     color: white;
-    padding: 20px;
     border-radius: 4px;
+    padding: 25px 20px;
     text-align: center;
-}
-
-.stat-value {
-    font-size: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .stat-value {
+    font-size: 36px;
     font-weight: bold;
     margin-bottom: 5px;
-}
-
-.stat-label {
+  }
+  
+  .stat-label {
     font-size: 14px;
     opacity: 0.8;
-}
-
-/* Metrics Grid */
-.metrics-grid {
+  }
+  
+  .metrics-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
+    gap: 20px;
     margin-bottom: 20px;
-}
-
-.metric-card {
-    background-color: #0a2559;
+  }
+  
+  .metric-card {
+    background-color: #0a214e;
     color: white;
-    padding: 20px;
     border-radius: 4px;
-}
-
-.metric-card.wide {
-    padding: 15px 20px;
-}
-
-.metric-header {
+    padding: 20px;
+  }
+  
+  .metric-header {
     font-size: 16px;
-    margin-bottom: 10px;
-}
-
-.metric-content {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-}
-
-.metric-value {
-    font-size: 28px;
     font-weight: bold;
-}
-
-.metric-change {
+    margin-bottom: 15px;
+  }
+  
+  .metric-content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .metric-value {
+    font-size: 38px;
+    font-weight: bold;
+  }
+  
+  .metric-change {
+    margin-left: 10px;
     font-size: 16px;
-}
-
-.metric-change.positive {
+  }
+  
+  .metric-change.positive {
     color: #4caf50;
-}
-
-.metric-change.negative {
-    color: #f44336;
-}
-
-.metric-subtext {
+  }
+  
+  .metric-subtext {
     font-size: 14px;
     opacity: 0.8;
-    margin-top: 5px;
-}
-
-/* Maintenance Section */
-.maintenance-section {
-    background-color: #0a2559;
+  }
+  
+  .maintenance-section {
+    background-color: #0a214e;
     color: white;
+    border-radius: 4px;
     padding: 20px;
-    border-radius: 4px;
-}
-
-.maintenance-section h2 {
-    margin-bottom: 15px;
-    font-size: 18px;
-}
-
-.maintenance-form {
+    margin-bottom: 20px;
+  }
+  
+  .maintenance-section h2 {
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: bold;
+  }
+  
+  .maintenance-form {
     display: flex;
-    flex-wrap: wrap;
     gap: 15px;
-}
-
-.date-input {
-    padding: 12px;
+    flex-wrap: wrap;
+  }
+  
+  .date-input, .message-input {
+    padding: 15px;
     border: none;
     border-radius: 4px;
-    width: calc(50% - 10px);
-}
-
-.message-input {
-    padding: 12px;
-    border: none;
-    border-radius: 4px;
-    width: calc(100% - 100px);
-}
-
-.add-btn {
-    background-color: #5a6cad;
+    font-size: 14px;
+  }
+  
+  .date-input {
+    flex: 1;
+    min-width: 200px;
+  }
+  
+  .message-input {
+    flex: 2;
+    min-width: 300px;
+  }
+  
+  .add-btn {
+    background-color: #3a5999;
     color: white;
     border: none;
     border-radius: 4px;
-    padding: 0 20px;
+    padding: 15px 30px;
     cursor: pointer;
-    width: 85px;
-}
-
-/* Responsive Adjustments */
-@media (max-width: 1200px) {
+    font-weight: bold;
+  }
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 1200px) {
     .stats-grid {
-        grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 992px) {
+    .dashboard-content {
+      flex-direction: column;
     }
     
-    .metrics-grid {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .dashboard-layout {
-        flex-direction: column;
+    .dashboard-content .sidebar {
+      width: 100%;
+      flex: auto;
     }
     
-    .sidebar {
-        width: 100%;
+    .content-wrapper {
+      padding: 20px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .stats-grid, .metrics-grid {
+      grid-template-columns: 1fr;
     }
     
-    .stats-grid {
-        grid-template-columns: 1fr;
+    .maintenance-form {
+      flex-direction: column;
     }
     
-    .date-input, .message-input {
-        width: 100%;
+    .admin-container h1 {
+      padding-left: 20px;
     }
-    
-    .add-btn {
-        width: 100%;
-    }
-}
+  }

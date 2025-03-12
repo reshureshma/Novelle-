@@ -14,11 +14,10 @@
         <div class="admin-container">
             <h1>ADMIN PANEL</h1>
             
-
+            <div class="dashboard-content">
+                <%-include("../partials/admin/sidebar.ejs")%>
                 
-                <div class="dashboard-content">
-                    <%-include("../partials/admin/sidebar.ejs")%>
-
+                <div class="content-wrapper">
                     <div class="dashboard-header">
                         <div class="time-filter">
                             <select>
@@ -53,7 +52,7 @@
                     </div>
                     
                     <div class="metrics-grid">
-                        <div class="metric-card wide">
+                        <div class="metric-card">
                             <div class="metric-header">REVENUE</div>
                             <div class="metric-content">
                                 <div class="metric-value">₹ 13427500</div>
@@ -61,7 +60,7 @@
                             </div>
                             <div class="metric-subtext">11.3% Since Last Month</div>
                         </div>
-                        <div class="metric-card wide">
+                        <div class="metric-card">
                             <div class="metric-header">SALES</div>
                             <div class="metric-content">
                                 <div class="metric-value">₹ 3342500</div>

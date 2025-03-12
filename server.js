@@ -34,6 +34,8 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join(__dirname,"public")));
 
 app.use("/",userRouter);
+app.use("/admin",adminRouter);
+
 
 const PORT = process.env.PORT || 5000; 
 app.listen(PORT,()=>{

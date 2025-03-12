@@ -4,110 +4,255 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOVELLE Admin Panel</title>
-    <link rel="stylesheet" href="administer.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+        }
+
+        /* Header */
+        .header {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            color: #000;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        /* Container */
+        .container {
+            display: flex;
+            margin: 20px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 320px;
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            transition: background-color 0.2s ease;
+        }
+
+        .sidebar-item:hover,
+        .sidebar-item.active {
+            background-color: #002366;
+            color: white;
+        }
+
+        .sidebar-item i {
+            margin-right: 15px;
+        }
+
+        .sidebar-item span {
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex-grow: 1;
+            margin-left: 20px;
+        }
+
+        .panel-title {
+            font-size: 36px;
+            color: #002366;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        /* Top Controls */
+        .top-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        /* Search Bar */
+        .search-bar input {
+            width: 220px;
+            padding: 10px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 20px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        /* Add Product Button */
+        .add-product-btn {
+            padding: 10px 15px;
+            background-color: #002366;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-transform: uppercase;
+        }
+
+        .add-product-btn:hover {
+            background-color: #001845;
+        }
+
+        /* Product Table */
+        .product-table {
+            width: 100%;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .product-table-header,
+        .product-table-row {
+            display: grid;
+            grid-template-columns: 80px 2fr 1fr 1fr 1fr 1fr 1fr 1fr;
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+            align-items: center;
+        }
+
+        .product-table-header {
+            background-color: #ddd;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .product-table-row:last-child {
+            border-bottom: none;
+        }
+
+        .product-img {
+            width: 60px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 3px;
+        }
+
+        .badge {
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 500;
+            color: white;
+            text-align: center;
+        }
+
+        .badge.yes {
+            background-color: #52c41a;
+        }
+
+        .badge.no {
+            background-color: #f5222d;
+        }
+
+        /* Action Buttons */
+        .update-btn, .delete-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 3px;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-transform: uppercase;
+            margin-left: 5px;
+        }
+
+        .update-btn {
+            background-color: #1890ff;
+        }
+
+        .update-btn:hover {
+            background-color: #40a9ff;
+        }
+
+        .delete-btn {
+            background-color: #f5222d;
+        }
+
+        .delete-btn:hover {
+            background-color: #ff4d4f;
+        }
+    </style>
 </head>
 <body>
-
-    <%- include('../partials/admin/header.ejs') %> <!-- Include Header -->
-
-    <main class="dashboard-container">
-        <%- include('../partials/admin/sidebar.ejs') %> <!-- Include Sidebar -->
-
-        <div class="content">
-            <h1>ADMIN PANEL</h1>
-
-            <div class="product-controls">
-                <button class="add-product-btn">ADD PRODUCT</button>
-                <div class="search-container">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="SEARCH PRODUCT">
-                </div>
-            </div>
-
-            <div class="product-list">
-                <div class="product-header">
-                    <div class="header-item product-name">PRODUCT NAME</div>
-                    <div class="header-item price">PRICE</div>
-                    <div class="header-item bestseller">BESTSELLER</div>
-                    <div class="header-item trending">TRENDING</div>
-                    <div class="header-item actions"></div>
-                </div>
-            
-                <div class="product-item">
-                    <div class="product-info">
-                        <img src="https://m.media-amazon.com/images/I/41MJ1i1nIqL._SY445_SX342_.jpg" alt="Book cover" class="product-image">
-                        <div class="product-title">THE ALCHEMIST</div>
-                    </div>
-                    <div class="product-price">₹ 499</div>
-                    <div class="product-bestseller">YES</div>
-                    <div class="product-trending">NO</div>
-                    <div class="product-actions">
-                        <button class="update-btn">UPDATE</button>
-                        <button class="delete-btn">DELETE</button>
-                    </div>
-                </div>
-            
-                <div class="product-item">
-                    <div class="product-info">
-                        <img src="https://m.media-amazon.com/images/I/51lTtUTFzPL._SY445_SX342_.jpg" alt="Book cover" class="product-image">
-                        <div class="product-title">THE FAULT IN OUR STARS</div>
-                    </div>
-                    <div class="product-price">₹ 3999</div>
-                    <div class="product-bestseller">NO</div>
-                    <div class="product-trending">YES</div>
-                    <div class="product-actions">
-                        <button class="update-btn">UPDATE</button>
-                        <button class="delete-btn">DELETE</button>
-                    </div>
-                </div>
-            
-                <div class="product-item">
-                    <div class="product-info">
-                        <img src="https://m.media-amazon.com/images/I/51ocMz8-DvL._SY445_SX342_.jpg" alt="Book cover" class="product-image">
-                        <div class="product-title">WITCH'S SECRET</div>
-                    </div>
-                    <div class="product-price">₹ 599</div>
-                    <div class="product-bestseller">NO</div>
-                    <div class="product-trending">YES</div>
-                    <div class="product-actions">
-                        <button class="update-btn">UPDATE</button>
-                        <button class="delete-btn">DELETE</button>
-                    </div>
-                </div>
-            
-                <div class="product-item">
-                    <div class="product-info">
-                        <img src="https://m.media-amazon.com/images/I/41SYDaATCmL._SY445_SX342_.jpg" alt="Book cover" class="product-image">
-                        <div class="product-title">THE WOMEN IN THE WALLS</div>
-                    </div>
-                    <div class="product-price">₹ 499</div>
-                    <div class="product-bestseller">NO</div>
-                    <div class="product-trending">NO</div>
-                    <div class="product-actions">
-                        <button class="update-btn">UPDATE</button>
-                        <button class="delete-btn">DELETE</button>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="load-more-container">
-                <button class="load-more-btn">LOAD MORE</button>
-            </div>
-            
+    <div class="header">
+        <h1>NOVELLE</h1>
+    </div>
+    
+    <div class="container">
+        <div class="sidebar">
+            <a href="/admin/insights" class="sidebar-item"><i>📊</i><span>Insight</span></a>
+            <a href="/admin/orders" class="sidebar-item"><i>📦</i><span>Order Management</span></a>
+            <a href="/admin/users" class="sidebar-item"><i>👥</i><span>User Management</span></a>
+            <a href="/admin/products" class="sidebar-item active"><i>🛒</i><span>Product Management</span></a>
+            <a href="/admin/categories" class="sidebar-item"><i>📁</i><span>Category Management</span></a>
+            <a href="/admin/coupons" class="sidebar-item"><i>🎟️</i><span>Coupon Management</span></a>
+            <a href="/admin/logout" class="sidebar-item"><i>🚪</i><span>Logout</span></a>
         </div>
-    </main>
+        
+        <div class="main-content">
+            <h2 class="panel-title">ADMIN PANEL</h2>
 
-    <script>
-        // Simple interactions for demonstration
-        document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelector('.menu-item.selected')?.classList.remove('selected');
-                this.classList.add('selected');
-            });
-        });
-    </script>
+            <div class="top-controls">
+                <div class="search-bar">
+                    <input type="text" placeholder="Search Product">
+                </div>
+                <button class="add-product-btn">➕ Add New Product</button>
+            </div>
 
+            <div class="product-table">
+                <div class="product-table-header">
+                    <span>Image</span>
+                    <span>Product Name</span>
+                    <span>Category</span>
+                    <span>Price</span>
+                    <span>Stock</span>
+                    <span>Edit</span>
+                    <span>Block</span>
+                    <span>Delete</span>
+                </div>
+                <div class="product-table-row">
+                    <span><img src="product.jpg" class="product-img"></span>
+                    <span>Classic White T-Shirt</span>
+                    <span>Clothing</span>
+                    <span>₹499</span>
+                    <span class="badge yes">Yes</span>
+                    <button class="update-btn">Edit</button>
+                    <button class="delete-btn">Block</button>
+                    <button class="delete-btn">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

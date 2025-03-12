@@ -4,82 +4,351 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOVELLE Admin Panel</title>
-    <link rel="stylesheet" href="/styles/adminuser.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+        }
+        
+        .header {
+            padding: 15px 20px;
+            background-color: white;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            color: #000;
+            font-weight: bold;
+        }
+        
+        .container {
+            display: flex;
+            margin: 20px;
+        }
+        
+        .sidebar {
+            width: 280px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .sidebar-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .sidebar-item.active {
+            background-color: #0b2656;
+            color: white;
+        }
+            
+        .sidebar-item i {
+            margin-right: 15px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .sidebar-item span {
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .main-content {
+            flex-grow: 1;
+            margin-left: 20px;
+        }
+        
+        .search-bar {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 14px;
+            outline: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>');
+            background-repeat: no-repeat;
+            background-position: 10px center;
+            padding-left: 40px;
+        }
+        
+        .search-bar input:focus {
+            border-color: #0b2656;
+        }
+        
+        .user-table {
+            width: 100%;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .user-table-header {
+            background-color: #0b2656;
+            color: white;
+            padding: 15px 20px;
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr 1fr 0.5fr 0.5fr;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .user-table-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr 1fr 0.5fr 0.5fr;
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            align-items: center;
+        }
+        
+        .user-table-row:last-child {
+            border-bottom: none;
+        }
+        
+        .user-table-cell {
+            font-size: 14px;
+        }
+        
+        .block-btn, .delete-btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 3px;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+        
+        .block-btn {
+            background-color: #ff7a45;
+        }
+        
+        .block-btn:hover {
+            background-color: #ff6d3a;
+        }
+        
+        .delete-btn {
+            background-color: #f5222d;
+        }
+        
+        .delete-btn:hover {
+            background-color: #e81123;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+            align-items: center;
+        }
+        
+        .pagination-info {
+            color: #666;
+            font-size: 14px;
+            margin-right: auto;
+        }
+        
+        .pagination-btn {
+            width: 35px;
+            height: 35px;
+            border: 1px solid #e0e0e0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background-color: white;
+        }
+        
+        .pagination-btn.active {
+            background-color: #0b2656;
+            color: white;
+            border-color: #0b2656;
+        }
+        
+        .pagination-btn:hover:not(.active) {
+            background-color: #f5f5f5;
+        }
+        
+        .pagination-btn.arrow {
+            font-size: 18px;
+        }
+        
+        /* Icon styles */
+        .icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
-    <%- include("../partials/admin/header.ejs") %>
+    <div class="header">
+        <h1>NOVELLE</h1>
+    </div>
     
-    <main>
-        <h1>ADMIN PANEL</h1>
+    <div class="container">
+        <div class="sidebar">
+            <a href="/admin/insights" class="sidebar-item">
+                <i class="icon">📊</i>
+                <span>Insight</span>
+            </a>
+            <a href="/admin/orders" class="sidebar-item">
+                <i class="icon">📦</i>
+                <span>Order Management</span>
+            </a>
+            <a href="/admin/users" class="sidebar-item active">
+                <i class="icon">👥</i>
+                <span>User Management</span>
+            </a>
+            <a href="/admin/products" class="sidebar-item">
+                <i class="icon">🛒</i>
+                <span>Product Management</span>
+            </a>
+            <a href="/admin/categories" class="sidebar-item">
+                <i class="icon">📁</i>
+                <span>Category Management</span>
+            </a>
+            <a href="/admin/coupons" class="sidebar-item">
+                <i class="icon">🎟️</i>
+                <span>Coupon Management</span>
+            </a>
+            <a href="/admin/logout" class="sidebar-item">
+                <i class="icon">🚪</i>
+                <span>Logout</span>
+            </a>
+        </div>
         
-        <div class="dashboard-container">
-            <%- include("../partials/admin/sidebar.ejs") %>
-
-            <div class="content">
-                <div class="search-container">
-                    <i class="fas fa-search"></i>
-                    <input type="text" placeholder="SEARCH ORDER">
+        <div class="main-content">
+            <h2 style="margin-bottom: 20px; color: #0b2656; font-size: 24px;">ADMIN PANEL</h2>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="SEARCH ORDER">
+            </div>
+            
+            <div class="user-table">
+                <div class="user-table-header">
+                    <span>USER NAME</span>
+                    <span>EMAIL ADDRESS</span>
+                    <span>PHONE NUMBER</span>
+                    <span>JOIN DATE</span>
+                    <span>BLOCK</span>
+                    <span>DELETE</span>
                 </div>
                 
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>USER NAME</th>
-                                <th>EMAIL ADDRESS</th>
-                                <th>PHONE NUMBER</th>
-                                <th>JOIN DATE</th>
-                                <th>BLOCK</th>
-                                <th>DELETE</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <% users.forEach(user => { %>
-                            <tr>
-                                <td><%= user.name %></td>
-                                <td><%= user.email %></td>
-                                <td><%= user.phone %></td>
-                                <td><%= user.joinDate %></td>
-                                <td><button class="block-btn">BLOCK</button></td>
-                                <td><button class="delete-btn">DELETE</button></td>
-                            </tr>
-                            <% }); %>
-                        </tbody>
-                    </table>
+                <div class="user-table-row">
+                    <span class="user-table-cell">ABCD</span>
+                    <span class="user-table-cell">ABCD@GMAIL.COM</span>
+                    <span class="user-table-cell">1234567890</span>
+                    <span class="user-table-cell">21/4/2023</span>
+                    <span class="user-table-cell"><button class="block-btn">BLOCK</button></span>
+                    <span class="user-table-cell"><button class="delete-btn">DELETE</button></span>
                 </div>
                 
-                <div class="pagination">
-                    <span>Showing 1-10 from 100</span>
-                    <div class="pagination-controls">
-                        <button class="prev-btn"><i class="fas fa-chevron-left"></i></button>
-                        <button class="page-btn active">01</button>
-                        <button class="page-btn">02</button>
-                        <button class="page-btn">03</button>
-                        <button class="page-btn">04</button>
-                        <button class="page-btn">05</button>
-                        <button class="next-btn"><i class="fas fa-chevron-right"></i></button>
-                    </div>
+                <div class="user-table-row">
+                    <span class="user-table-cell">EFGH</span>
+                    <span class="user-table-cell">EFGH@GMAIL.COM</span>
+                    <span class="user-table-cell">2345678901</span>
+                    <span class="user-table-cell">14/5/2022</span>
+                    <span class="user-table-cell"><button class="block-btn">BLOCK</button></span>
+                    <span class="user-table-cell"><button class="delete-btn">DELETE</button></span>
+                </div>
+                
+                <div class="user-table-row">
+                    <span class="user-table-cell">IJKL</span>
+                    <span class="user-table-cell">IJKL@GMAIL.COM</span>
+                    <span class="user-table-cell">3456789012</span>
+                    <span class="user-table-cell">31/1/2024</span>
+                    <span class="user-table-cell"><button class="block-btn">BLOCK</button></span>
+                    <span class="user-table-cell"><button class="delete-btn">DELETE</button></span>
+                </div>
+                
+                <div class="user-table-row">
+                    <span class="user-table-cell">MNOP</span>
+                    <span class="user-table-cell">MNOP@GMAIL.COM</span>
+                    <span class="user-table-cell">4567890123</span>
+                    <span class="user-table-cell">17/10/2020</span>
+                    <span class="user-table-cell"><button class="block-btn">BLOCK</button></span>
+                    <span class="user-table-cell"><button class="delete-btn">DELETE</button></span>
+                </div>
+                
+                <div class="user-table-row">
+                    <span class="user-table-cell">QRST</span>
+                    <span class="user-table-cell">QRST@GMAIL.COM</span>
+                    <span class="user-table-cell">5678901234</span>
+                    <span class="user-table-cell">6/2/2023</span>
+                    <span class="user-table-cell"><button class="block-btn">BLOCK</button></span>
+                    <span class="user-table-cell"><button class="delete-btn">DELETE</button></span>
+                </div>
+                
+                <div class="user-table-row">
+                    <span class="user-table-cell">UVWX</span>
+                    <span class="user-table-cell">UVWX@GMAIL.COM</span>
+                    <span class="user-table-cell">6789012345</span>
+                    <span class="user-table-cell">19/3/2022</span>
+                    <span class="user-table-cell"><button class="block-btn">BLOCK</button></span>
+                    <span class="user-table-cell"><button class="delete-btn">DELETE</button></span>
+                </div>
+                
+                <div class="user-table-row">
+                    <span class="user-table-cell">YZAB</span>
+                    <span class="user-table-cell">YZAB@GMAIL.COM</span>
+                    <span class="user-table-cell">7890123456</span>
+                    <span class="user-table-cell">22/2/2022</span>
+                    <span class="user-table-cell"><button class="block-btn">BLOCK</button></span>
+                    <span class="user-table-cell"><button class="delete-btn">DELETE</button></span>
+                </div>
+                
+                <div class="user-table-row">
+                    <span class="user-table-cell">CDEF</span>
+                    <span class="user-table-cell">CDEF@GMAIL.COM</span>
+                    <span class="user-table-cell">8901234567</span>
+                    <span class="user-table-cell">29/8/2020</span>
+                    <span class="user-table-cell"><button class="block-btn">BLOCK</button></span>
+                    <span class="user-table-cell"><button class="delete-btn">DELETE</button></span>
                 </div>
             </div>
+            
+            <div class="pagination">
+                <div class="pagination-info">Showing 1-10 from 100</div>
+                <div class="pagination-btn arrow">←</div>
+                <div class="pagination-btn active">01</div>
+                <div class="pagination-btn">02</div>
+                <div class="pagination-btn">03</div>
+                <div class="pagination-btn">04</div>
+                <div class="pagination-btn">05</div>
+                <div class="pagination-btn arrow">→</div>
+            </div>
         </div>
-    </main>
-
-    <script>
-        document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelector('.menu-item.selected')?.classList.remove('selected');
-                this.classList.add('selected');
-            });
-        });
-        
-        document.querySelectorAll('.block-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                this.textContent = this.textContent === "BLOCK" ? "UNBLOCK" : "BLOCK";
-                this.classList.toggle('blocked');
-            });
-        });
-    </script>
+    </div>
 </body>
 </html>

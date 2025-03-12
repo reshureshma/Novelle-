@@ -1,12 +1,15 @@
-/* Header Styles */
 header {
-    background-color: white;
-    padding: 15px 30px;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.logo {
-    font-size: 24px;
+    width: 100%;
+    padding: 15px 0;
+    border-bottom: 1px solid #eaeaea;
+    background-color: #fff;
+  }
+  
+  .logo {
+    font-family: sans-serif;
+    font-size: 20px;
     font-weight: bold;
+    text-transform: uppercase;
     color: #000;
-}
+    margin-left: 20px;
+  }

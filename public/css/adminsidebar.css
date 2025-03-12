@@ -1,39 +1,44 @@
-/* Sidebar Styles */
 .sidebar {
-    background-color: #fff;
     width: 280px;
-    border-radius: 4px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-}
-
-.nav-menu {
+    background-color: #fff;
+    min-height: calc(100vh - 150px);
+    border-right: 1px solid #eaeaea;
+  }
+  
+  .nav-menu {
     list-style: none;
-}
-
-.nav-menu li {
-    border-bottom: 1px solid #f2f2f2;
-}
-
-.nav-menu li a {
+    padding: 0;
+    margin: 0;
+  }
+  
+  .nav-menu li {
+    border-bottom: 1px solid #eaeaea;
+  }
+  
+  .nav-menu li a {
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 18px 20px;
     color: #333;
     text-decoration: none;
-    transition: background-color 0.2s;
-}
-
-.nav-menu li.active a {
-    background-color: #0a2559;
+    transition: background-color 0.3s;
+  }
+  
+  .nav-menu li.active a {
+    background-color: #0a214e;
     color: white;
-}
-
-.nav-menu li a:hover:not(.active) {
-    background-color: #f9f9f9;
-}
-
-.nav-menu li a i {
+  }
+  
+  .nav-menu li a i {
     margin-right: 15px;
     width: 20px;
     text-align: center;
-}
+    font-size: 16px;
+  }
+  
+  .nav-menu li a span {
+    font-family: sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }

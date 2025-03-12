@@ -56,9 +56,82 @@ const loadInsights = async(req,res)=>{
     }
    }
 }
+
+const logout = async(req,res)=>{
+    try {
+        req.session.destroy(err=>{
+            if(err){
+                console.log("Erropr destroying session");
+                return res.redirect("/pageerror"); 
+            }
+            res.redirect("/admin/login");
+        })
+    } catch (error) {
+        console.log("unexpected error during logout",error);
+        res.redirect("/pageerror");
+        
+    }
+}
+
+
+//user management.
+
+const userInfo = async(req,res)=>{
+    try {
+
+       let search = "";
+       if(req.query.search){
+        search = req.query.search;
+       } 
+
+       let page = 1;
+       if(req.query.page){
+        page = req.query.page
+       }
+       const limit = 3;
+       const userData = await User.find({
+        isAdmin:false,
+        $or:[
+            {name: {$regex:".*"+search+".*"}},
+            {email:{$regex:".*"+search+".*"}}
+        ],
+       })
+       .limit(limit*1)
+       .skip((page-1)*limit)
+       .exec();
+
+       const count = await User.find({
+
+        isAdmin:false,
+        $or:[
+            {name: {$regex:".*"+search+".*"}},
+            {email:{$regex:".*"+search+".*"}}
+        ],
+
+       }).countDocuments();
+
+       res.render("admin/adminuser")
+
+    } catch (error) {
+        
+    }
+}
+
+const productInfo = async(req,res)=>{
+    try {
+        res.render("admin/adminproduct");
+    } catch (error) {
+        console.log("ERROR IN PRODUCT",error);
+        return res.redirect("/pagenotfound")
+    }
+}
+
 module.exports = {
     loadLogin,
     login,
     loadInsights,
-    pageerror
+    pageerror,
+    logout,
+    userInfo,
+    productInfo
 }

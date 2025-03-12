@@ -3,112 +3,440 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVELLE Admin Panel - Add Product</title>
-    <link rel="stylesheet" href="/css/adminaddproduct.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>NOVELLE Admin Panel - Product Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+        }
+        
+        .header {
+            padding: 15px 20px;
+            background-color: white;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            color: #000;
+            font-weight: bold;
+        }
+        
+        .container {
+            display: flex;
+            margin: 20px;
+        }
+        
+        .sidebar {
+            width: 280px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .sidebar-item:hover {
+            background-color: #f9f9f9;
+        }
+
+        .sidebar-item.active {
+            background-color: #0b2656;
+            color: white;
+        }
+            
+        .sidebar-item i {
+            margin-right: 15px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .sidebar-item span {
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .main-content {
+            flex-grow: 1;
+            margin-left: 20px;
+        }
+        
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .search-bar {
+            flex-grow: 1;
+            margin-right: 15px;
+        }
+        
+        .search-bar input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 14px;
+            outline: none;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>');
+            background-repeat: no-repeat;
+            background-position: 10px center;
+            padding-left: 40px;
+        }
+        
+        .search-bar input:focus {
+            border-color: #0b2656;
+        }
+        
+        .add-product-btn {
+            padding: 12px 20px;
+            background-color: #0b2656;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-transform: uppercase;
+        }
+        
+        .add-product-btn:hover {
+            background-color: #0a1f4d;
+        }
+        
+        .product-table {
+            width: 100%;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .product-table-header {
+            background-color: #0b2656;
+            color: white;
+            padding: 15px 20px;
+            display: grid;
+            grid-template-columns: 80px 2fr 1fr 1fr 1fr 1fr 1fr;
+            font-size: 14px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+        
+        .product-table-row {
+            display: grid;
+            grid-template-columns: 80px 2fr 1fr 1fr 1fr 1fr 1fr;
+            padding: 15px 20px;
+            border-bottom: 1px solid #f0f0f0;
+            align-items: center;
+        }
+        
+        .product-table-row:last-child {
+            border-bottom: none;
+        }
+        
+        .product-table-cell {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .product-img {
+            width: 60px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 3px;
+        }
+        
+        .update-btn, .delete-btn {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 3px;
+            color: white;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-transform: uppercase;
+        }
+        
+        .update-btn {
+            background-color: #1890ff;
+            margin-right: 5px;
+        }
+        
+        .update-btn:hover {
+            background-color: #40a9ff;
+        }
+        
+        .delete-btn {
+            background-color: #f5222d;
+        }
+        
+        .delete-btn:hover {
+            background-color: #ff4d4f;
+        }
+        
+        .action-buttons {
+            display: flex;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+            align-items: center;
+        }
+        
+        .pagination-info {
+            color: #666;
+            font-size: 14px;
+            margin-right: auto;
+        }
+        
+        .pagination-btn {
+            width: 35px;
+            height: 35px;
+            border: 1px solid #e0e0e0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background-color: white;
+        }
+        
+        .pagination-btn.active {
+            background-color: #0b2656;
+            color: white;
+            border-color: #0b2656;
+        }
+        
+        .pagination-btn:hover:not(.active) {
+            background-color: #f5f5f5;
+        }
+        
+        .pagination-btn.arrow {
+            font-size: 18px;
+        }
+        
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 8px;
+        }
+        
+        .status-indicator.in-stock {
+            background-color: #52c41a;
+        }
+        
+        .status-indicator.low-stock {
+            background-color: #faad14;
+        }
+        
+        .status-indicator.out-of-stock {
+            background-color: #f5222d;
+        }
+        
+        .icon {
+            width: 20px;
+            height: 20px;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 3px;
+            font-size: 12px;
+            font-weight: 500;
+            color: white;
+        }
+        
+        .badge.yes {
+            background-color: #52c41a;
+        }
+        
+        .badge.no {
+            background-color: #f5222d;
+        }
+    </style>
 </head>
 <body>
-    <%- include("../partials/admin/header.ejs") %>
-
-    <main>
-        <h1>ADMIN PANEL</h1>
-        
-        <div class="dashboard-container">
-            <%- include("../partials/admin/sidebar.ejs")%>
-
-            <div class="content">
-                <div class="add-product-form">
-                    <h2>Add Product</h2>
-                    
-                    <form action="/admin/add-product" method="POST" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="product-name">Product Name</label>
-                            <input type="text" name="productName" id="product-name" placeholder="Enter Product Name" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="product-price">Product Price</label>
-                            <input type="number" name="productPrice" id="product-price" placeholder="Enter Product Price" required>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="secondary-price">Secondary Price</label>
-                            <input type="number" name="secondaryPrice" id="secondary-price" placeholder="Enter Secondary Product Price (optional)">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="offer-percentage">Offer Percentage</label>
-                            <input type="number" name="offerPercentage" id="offer-percentage" placeholder="Enter Offer Percentage (0-100)">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="product-description">Product Description</label>
-                            <textarea name="productDescription" id="product-description" placeholder="Enter Product Description" required></textarea>
-                        </div>
-                        
-                        <div class="form-row">
-                            <div class="form-group checkbox-group">
-                                <label for="bestselling">BESTSELLING</label>
-                                <input type="checkbox" name="bestselling" id="bestselling">
-                            </div>
-                            
-                            <div class="form-group checkbox-group">
-                                <label for="trending">TRENDING</label>
-                                <input type="checkbox" name="trending" id="trending">
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="stock">Stock</label>
-                            <div class="stock-counter">
-                                <button type="button" class="counter-btn" id="decrease-stock">-</button>
-                                <input type="number" name="stock" id="stock" value="0" min="0">
-                                <button type="button" class="counter-btn" id="increase-stock">+</button>
-                            </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Product Image</label>
-                            <input type="file" name="productImage" accept="image/*">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label>Category</label>
-                            <select name="category">
-                                <option value="Fiction">Fiction</option>
-                                <option value="Non-fiction">Non-fiction</option>
-                                <option value="Kids">Kids</option>
-                                <option value="Lifestyle">Lifestyle</option>
-                            </select>
-                        </div>
-                        
-                        <button type="submit" class="submit-btn">Add Product</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </main>
+    <div class="header">
+        <h1>NOVELLE</h1>
+    </div>
     
-    <script>
-        document.querySelectorAll('.menu-item').forEach(item => {
-            item.addEventListener('click', function() {
-                document.querySelector('.menu-item.selected')?.classList.remove('selected');
-                this.classList.add('selected');
-            });
-        });
+    <div class="container">
+        <div class="sidebar">
+            <a href="/admin/insights" class="sidebar-item">
+                <i class="icon">📊</i>
+                <span>Insight</span>
+            </a>
+            <a href="/admin/orders" class="sidebar-item">
+                <i class="icon">📦</i>
+                <span>Order Management</span>
+            </a>
+            <a href="/admin/users" class="sidebar-item">
+                <i class="icon">👥</i>
+                <span>User Management</span>
+            </a>
+            <a href="/admin/products" class="sidebar-item active">
+                <i class="icon">🛒</i>
+                <span>Product Management</span>
+            </a>
+            <a href="/admin/categories" class="sidebar-item">
+                <i class="icon">📁</i>
+                <span>Category Management</span>
+            </a>
+            <a href="/admin/coupons" class="sidebar-item">
+                <i class="icon">🎟️</i>
+                <span>Coupon Management</span>
+            </a>
+            <a href="/admin/logout" class="sidebar-item">
+                <i class="icon">🚪</i>
+                <span>Logout</span>
+            </a>
+        </div>
         
-        document.getElementById('increase-stock').addEventListener('click', function() {
-            const stockInput = document.getElementById('stock');
-            stockInput.value = parseInt(stockInput.value) + 1;
-        });
-        
-        document.getElementById('decrease-stock').addEventListener('click', function() {
-            const stockInput = document.getElementById('stock');
-            if (parseInt(stockInput.value) > 0) {
-                stockInput.value = parseInt(stockInput.value) - 1;
-            }
-        });
-    </script>
-</body>
-</html>
+        <div class="main-content">
+            <h2 style="margin-bottom: 20px; color: #0b2656; font-size: 24px;">ADMIN PANEL</h2>
+            
+            <div class="top-bar">
+                <div class="search-bar">
+                    <input type="text" placeholder="SEARCH PRODUCT">
+                </div>
+                <button class="add-product-btn">ADD PRODUCT</button>
+            </div>
+            
+            <div class="product-table">
+                <div class="product-table-header">
+                    <span>IMAGE</span>
+                    <span>PRODUCT NAME</span>
+                    <span>CATEGORY</span>
+                    <span>PRICE</span>
+                    <span>STOCK STATUS</span>
+                    <span>FEATURED</span>
+                    <span>ACTIONS</span>
+                </div>
+                
+                <div class="product-table-row">
+                    <span class="product-table-cell">
+                        <img src="https://via.placeholder.com/60x80" alt="Product" class="product-img">
+                    </span>
+                    <span class="product-table-cell">The Alchemist</span>
+                    <span class="product-table-cell">Fiction</span>
+                    <span class="product-table-cell">₹499</span>
+                    <span class="product-table-cell">
+                        <div class="status-indicator in-stock"></div>
+                        In Stock
+                    </span>
+                    <span class="product-table-cell">
+                        <span class="badge yes">YES</span>
+                    </span>
+                    <span class="product-table-cell">
+                        <div class="action-buttons">
+                            <button class="update-btn">UPDATE</button>
+                            <button class="delete-btn">DELETE</button>
+                        </div>
+                    </span>
+                </div>
+                
+                <div class="product-table-row">
+                    <span class="product-table-cell">
+                        <img src="https://via.placeholder.com/60x80" alt="Product" class="product-img">
+                    </span>
+                    <span class="product-table-cell">The Fault in Our Stars</span>
+                    <span class="product-table-cell">Young Adult</span>
+                    <span class="product-table-cell">₹3999</span>
+                    <span class="product-table-cell">
+                        <div class="status-indicator low-stock"></div>
+                        Low Stock
+                    </span>
+                    <span class="product-table-cell">
+                        <span class="badge yes">YES</span>
+                    </span>
+                    <span class="product-table-cell">
+                        <div class="action-buttons">
+                            <button class="update-btn">UPDATE</button>
+                            <button class="delete-btn">DELETE</button>
+                        </div>
+                    </span>
+                </div>
+                
+                <div class="product-table-row">
+                    <span class="product-table-cell">
+                        <img src="https://via.placeholder.com/60x80" alt="Product" class="product-img">
+                    </span>
+                    <span class="product-table-cell">Witch's Secret</span>
+                    <span class="product-table-cell">Fantasy</span>
+                    <span class="product-table-cell">₹599</span>
+                    <span class="product-table-cell">
+                        <div class="status-indicator in-stock"></div>
+                        In Stock
+                    </span>
+                    <span class="product-table-cell">
+                        <span class="badge yes">YES</span>
+                    </span>
+                    <span class="product-table-cell">
+                        <div class="action-buttons">
+                            <button class="update-btn">UPDATE</button>
+                            <button class="delete-btn">DELETE</button>
+                        </div>
+                    </span>
+                </div>
+                
+                <div class="product-table-row">
+                    <span class="product-table-cell">
+                        <img src="https://via.placeholder.com/60x80" alt="Product" class="product-img">
+                    </span>
+                    <span class="product-table-cell">The Women in the Walls</span>
+                    <span class="product-table-cell">Horror</span>
+                    <span class="product-table-cell">₹499</span>
+                    <span class="product-table-cell">
+                        <div class="status-indicator out-of-stock"></div>
+                        Out of Stock
+                    </span>
+                    <span class="product-table-cell">
+                        <span class="badge no">NO</span>
+                    </span>
+                    <span class="product-table-cell">
+                        <div class="action-buttons">
+                            <button class="update-btn">UPDATE</button>
+                            <button class="delete-btn">DELETE</button>
+                        </div>
+                    </span>
+                </div>
+                
+                <div class="product-table-row">
+                    <span class="product-table-cell">
+                        <img src="https://via.placeholder.com/60x80" alt="Product" class="product-img">
+                    </span>
+                    <span class="product-table-cell">Sapiens</span>
+                    <span class="product-table-cell">Non-Fiction</span>
+                    <span class="product-table-cell">₹799</span>
+                    <span class="product-table
